@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameInsight - Your Gaming Knowledge Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .logo {
+            font-size: 3.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #00f2fe, #4facfe, #00f2fe);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient 3s ease infinite;
+            margin-bottom: 10px;
+        }
+
+        @keyframes gradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            color: #a0a0a0;
+            margin-bottom: 20px;
+        }
+
+        .description {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+            color: #c0c0c0;
+        }
+
+        .sites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .site-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px 30px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .site-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .site-card:hover::before {
+            left: 100%;
+        }
+
+        .site-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(79, 172, 254, 0.5);
+            box-shadow: 0 20px 40px rgba(79, 172, 254, 0.2);
+        }
+
+        .site-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .site-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #4facfe;
+        }
+
+        .site-url {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .site-desc {
+            color: #b0b0b0;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .visit-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .visit-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(79, 172, 254, 0.4);
+        }
+
+        .coming-soon {
+            text-align: center;
+            padding: 40px;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .coming-soon h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #4facfe;
+        }
+
+        .coming-soon p {
+            color: #888;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 60px;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.1rem;
+            }
+            
+            .sites-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="container">
+        <header>
+            <h1 class="logo">GameInsight</h1>
+            <p class="tagline">Your Hub for Gaming Knowledge</p>
+            <p class="description">
+                Welcome to GameInsight - a growing collection of comprehensive gaming resources. 
+                We create detailed guides, stats, and tools for your favorite games.
+            </p>
+        </header>
+
+        <div class="sites-grid">
+            <div class="site-card" onclick="window.open('https://phasmo.info', '_blank')">
+                <div class="site-icon">👻</div>
+                <h2 class="site-title">Phasmo Info</h2>
+                <p class="site-url">phasmo.info</p>
+                <p class="site-desc">
+                    Complete Phasmophobia guide with ghost types, evidence tracking, and tips for identifying supernatural entities.
+                </p>
+                <a href="https://phasmo.info" class="visit-btn" target="_blank" onclick="event.stopPropagation()">Visit Site</a>
+            </div>
+
+            <div class="site-card" onclick="window.open('https://marvel-rivals.info', '_blank')">
+                <div class="site-icon">⚡</div>
+                <h2 class="site-title">Marvel Rivals Info</h2>
+                <p class="site-url">marvel-rivals.info</p>
+                <p class="site-desc">
+                    Your ultimate Marvel Rivals resource featuring hero guides, tier lists, strategies, and the latest game updates.
+                </p>
+                <a href="https://marvel-rivals.info" class="visit-btn" target="_blank" onclick="event.stopPropagation()">Visit Site</a>
+            </div>
+        </div>
+
+        <div class="coming-soon">
+            <h2>🎮 More Games Coming Soon</h2>
+            <p>We're constantly expanding our collection. Stay tuned for guides on more of your favorite games!</p>
+        </div>
+
+    <script>
+        // Create animated stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = Math.random() * 3 + 'px';
+            star.style.height = star.style.width;
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+    </script>
+</body>
+</html>
